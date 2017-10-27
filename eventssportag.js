@@ -47,12 +47,12 @@ function getDateTime() {
     }
 
 
-var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id, title, hour,  home_team,   home_money_ln,  away_team,  away_money_ln , game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition) {
+var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id, title, hour,  home_team,   home_money_ln,  home_sp,home_total, away_team,  away_money_ln , away_sp,away_total, game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition) {
    console.log("Printing from insertEventNHL:") 
     console.log(qPlayers, propositions_name, sportsbookag_event_id, title, hour, home_team,  home_money_ln, away_team,'',  away_money_ln , game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition )
    
         return sql.execute( {
-            procedure: "[dbo].[sportsbookag_insert_event_nhl]",
+            procedure: "[dbo].[sportsbookag_insert_event_sp_tot]",
             params: {
 
                 qPlayers: {
@@ -86,6 +86,16 @@ var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id
                     type: sql.VARCHAR(60),
                     val: home_money_ln
                 },
+
+                home_sp: {
+                    type: sql.VARCHAR(60),
+                    val: home_sp
+                },
+
+                home_total: {
+                    type: sql.VARCHAR(60),
+                    val: home_total
+                },
                  
                   away_team: {
                     type: sql.VARCHAR(60),
@@ -98,7 +108,16 @@ var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id
                     
                 },
     
-               
+                away_sp: {
+                    type: sql.VARCHAR(60),
+                    val: away_sp
+                },
+
+                away_total: {
+                    type: sql.VARCHAR(60),
+                    val: away_total
+                },
+                 
     
                 game_title: {
                   type: sql.VARCHAR(60),
@@ -340,8 +359,8 @@ function readDataFromWebsite(dirFile)
                 console.log("file saved in " + dirFile + ".json file");
             });
 
-      console.log("Games");  
-        console.log(json2.PROPOSITIONS.Games);
+     // console.log("Games");  
+     //   console.log(json2.PROPOSITIONS.Games);
        // console.log(json2.PROPOSITIONS.Games.Events)
       //  console.log(json2.PROPOSITIONS.Games.Id10.replace('moreBets',''));
 
@@ -357,7 +376,7 @@ function readDataFromWebsite(dirFile)
                
               
                
-                                         insertEventNHL(2,dirFile, json2.PROPOSITIONS.Games[Game].idevent, json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].Time, json2.PROPOSITIONS.Games[Game].Secondteam,json2.PROPOSITIONS.Games[Game].Money[1], json2.PROPOSITIONS.Games[Game].Firstteam, json2.PROPOSITIONS.Games[Game].Money,  json2.PROPOSITIONS.Games[Game].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition );
+                                         insertEventNHL(2,dirFile, json2.PROPOSITIONS.Games[Game].idevent, json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].Time, '2ndteam','2ndtml','2ndtSP', '2ndtTotal', json2.PROPOSITIONS.Games[Game].Firstteam, json2.PROPOSITIONS.Games[Game].Money, json2.PROPOSITIONS.Games[Game].Spread, json2.PROPOSITIONS.Games[Game].Total, json2.PROPOSITIONS.Games[Game].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition );
                                     
                
             }
