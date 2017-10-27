@@ -48,7 +48,7 @@ function getDateTime() {
 
 
 var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id, title, hour,  home_team,   home_money_ln,  away_team,  away_money_ln , game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition) {
-    
+   console.log("Printing from insertEventNHL:") 
     console.log(qPlayers, propositions_name, sportsbookag_event_id, title, hour, home_team,  home_money_ln, away_team,'',  away_money_ln , game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition )
    
         return sql.execute( {
@@ -62,7 +62,7 @@ var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id
                 },
 
                 propositions_name: {
-                    type: sql.VARCHAR(200),
+                    type: sql.VARCHAR(300),
                     val: propositions_name
                 },
                 sportsbookag_event_id: {
@@ -83,7 +83,7 @@ var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id
                     val: hour
                 },
                  home_money_ln: {
-                    type: sql.VARCHAR(20),
+                    type: sql.VARCHAR(60),
                     val: home_money_ln
                 },
                  
@@ -93,7 +93,7 @@ var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id
                 },
                 
                 away_money_ln: {
-                    type: sql.VARCHAR(20),
+                    type: sql.VARCHAR(60),
                     val: away_money_ln
                     
                 },
@@ -112,7 +112,7 @@ var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id
                           },
 
                           option_3_money_ln: {
-                            type: sql.int,
+                            type: sql.VARCHAR(60),
                                 val: option_3_money_ln
                               },
 
@@ -122,12 +122,12 @@ var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id
                                   },
         
                                   option_4_money_ln: {
-                                    type: sql.int,
+                                    type: sql.VARCHAR(60),
                                         val: option_4_money_ln
                                       },
 
                                       note: {
-                                        type: sql.VARCHAR(60),
+                                        type: sql.VARCHAR(200),
                                             val: note
                                           },
 
@@ -168,13 +168,23 @@ var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id
 
     var task = cron.schedule('*/5 * * * *', function(){
         console.log('running a task every 5 minutes. Actual time: ' + getDateTime());
-        // readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-team-totals.sbk');
-        // readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-game-props.sbk');
+        readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-team-score-first.sbk');
+        readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-first-score.sbk');
+       readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-score-in-minutes.sbk');
+       readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-longest-td.sbk');
+       readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-team-points.sbk');
+         readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-team-totals.sbk');
+         readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-game-props.sbk');
         readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-team-score-first.sbk');
       });
 
-    //   readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-team-totals.sbk');
-    //   readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-game-props.sbk');
+      readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-team-score-first.sbk');
+      readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-first-score.sbk');
+     readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-score-in-minutes.sbk');
+     readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-longest-td.sbk');
+     readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-team-points.sbk');
+       readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-team-totals.sbk');
+       readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-game-props.sbk');
       readDataFromWebsite('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-team-score-first.sbk');
 
 
@@ -325,12 +335,12 @@ function readDataFromWebsite(dirFile)
         var json2= JSON.parse(json);
 
 
-     var idProposition;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+     var idProposition=1;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
  fs.writeFile(dirFile + ".json", JSON.stringify(json, null, 4), function(err) {
                 console.log("file saved in " + dirFile + ".json file");
             });
 
-        
+      console.log("Games");  
         console.log(json2.PROPOSITIONS.Games);
        // console.log(json2.PROPOSITIONS.Games.Events)
       //  console.log(json2.PROPOSITIONS.Games.Id10.replace('moreBets',''));
@@ -346,88 +356,13 @@ function readDataFromWebsite(dirFile)
                 
                
               
-//                 for( var Events in json2.PROPOSITIONS.Games[Game].Events) {    
-                   
-        
-//                     for( var Lines in json2.PROPOSITIONS.Games[Game].Events[Events].Lines) {   
-                        
-//                         eventId= json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].id;
-                      
-                        
-//                         for( var Players in json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players) {    
-                            
-                         
-                                         
-//                                            numPlayers=numPlayers+1;
-                                       
-//                                      }
-        
-//                                      if (numPlayers==1)
-//                                      {
-                                       
-                                      
-//                                      }
-                                     
-//                                      else
-//                                      idProposition = createorExtractIdProposition(json2.PROPOSITIONS.Sub);
-
-//                                      if (json2.PROPOSITIONS.Sub=="Hockey Propositions")
-//                                      {
-// idProposition=1;
-//                                      }
-//                                      else
-//                                      if (json2.PROPOSITIONS.Sub=="Baseball Propositions")
-//                                      {
-//                                          idProposition=2;
-//                                      }
-console.log(json2.PROPOSITIONS);
-console.log(dirFile);
-console.log(json2.PROPOSITIONS.Games.idevent);
-console.log(json2.PROPOSITIONS.Games.Title);
-console.log(json2.PROPOSITIONS.Games.Secondteam);
-console.log(json2.PROPOSITIONS.Games.Firtsteam);
-console.log(json2.PROPOSITIONS.Games.Money);
-console.log(json2.PROPOSITIONS.Games.Title);
-console.log(dirFile);
-//                                   //   console.log(idProposition);
-//                                      if (numPlayers==2)
-//                                      {
-                                         insertEventNHL(2,dirFile, json2.PROPOSITIONS.Games.idevent, json2.PROPOSITIONS.Games.Title, json2.PROPOSITIONS.Games.Time, json2.PROPOSITIONS.Games.Secondteam,'', json2.PROPOSITIONS.Games.Firtsteam, json2.PROPOSITIONS.Games.Money,  json2.PROPOSITIONS.Games.Title, 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', idProposition );
-//                                      }
-//                                      else
-//                                      if (numPlayers==3)
-//                                     {
-//                                       //  insertEventNHL(3,json2.PROPOSITIONS.Sub, eventId.slice(0,9), json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].MainMsg, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].player,json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds,  json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Title, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].playerodds, idProposition );
-                                       
-                                       
-//                                     }
-//                                     if (numPlayers==4)
-//                                     {
-                                       
-                                        
-//                                        //   insertEventNHL(4,json2.PROPOSITIONS.Sub, eventId.slice(0,9), json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].MainMsg, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].player,json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds,  json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Title, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[3].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[3].playerodds, idProposition );
-                                      
-                                      
-//                                     }
-        
-//                                     numPlayers=0;
-        
-        
-                        
-//                       }
-        
-                   
-//                  }
+               
+                                         insertEventNHL(2,dirFile, json2.PROPOSITIONS.Games[Game].idevent, json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].Time, json2.PROPOSITIONS.Games[Game].Secondteam,json2.PROPOSITIONS.Games[Game].Money[1], json2.PROPOSITIONS.Games[Game].Firstteam, json2.PROPOSITIONS.Games[Game].Money,  json2.PROPOSITIONS.Games[Game].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition );
+                                    
                
             }
         
             
-           
-        
-            
-           
-       
-
       });
 
     
