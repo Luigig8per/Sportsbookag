@@ -1,0 +1,2 @@
+Response code: To detect the error when the page doesnt load.
+To extract the data from the father directly to his sons names.
