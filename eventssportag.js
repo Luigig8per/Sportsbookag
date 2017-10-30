@@ -241,13 +241,34 @@ function readDataFromWebsite(dirFile)
         "PROPOSITIONS":
         {
           
+                    
+
+                "Each line":".col-xs-12 col-md-9 col-lg-9 eventrow",
+
+                "Direct line":"div.row",
+                "Dirline":{
+                    "_s":"div.row",
+                    "_d":[{
+                        "Title":".row.event.eventheading",  
+                        "Firstteam":"span#firstTeamName.team-title",  
+                        "Secondteam":"span#secondTeamName.team-title", 
+                        "Team1":".col-xs-3.col-md-6.col-lg-6 .team-title",
+                        "Money":".column.money.pull-right",
+                        "Spread":".column.spread.pull-right",
+                        "Total":".column.total.pull-right",
+                    }]
+                },
+
+
 
                     "Category":".titleLabel",
-                   
+                    "Gameselector":".col-sm-12.eventbox",
+
                     "Games":{
                         "_s":".col-sm-12.eventbox",
                         "_d":[{
                 
+                            "All":".col-xs-12.col-md-9.col-lg-9.eventrow",
                            "Game id":"#id",
                            "Game id2":"div.col-sm-12.eventbox#id",
                                 "Time":"#time",   
@@ -271,19 +292,46 @@ function readDataFromWebsite(dirFile)
                                 "idevent":"a @ id",
                                 "Link":"a @ href",
 
-                                "Event":{
-                                    "Team1":"div.row",
-                                    "_s":".col-xs-12",
-                                    "_d":{
+                                "Direct line":"div.row",
+                                "Dirline":{
+                                    "_s":"div.row",
+                                    "_d":[{
+                                        "Title":".row.event.eventheading",  
+                                        "Firstteam":"span#firstTeamName.team-title",  
+                                        "Secondteam":"span#secondTeamName.team-title", 
+                                        "Team1":".col-xs-3.col-md-6.col-lg-6 .team-title",
+                                        "Money":".column.money.pull-right",
+                                        "Spread":".column.spread.pull-right",
+                                        "Total":".column.total.pull-right",
+                                    }]
+                                },
+
+                                "Eventselector":".col-xs-12.col-md-9.col-lg-9.eventrow .row",
+                                "EventSelected":{
+                                   
+                                    "_s":".col-xs-12.col-md-9.col-lg-9.eventrow .row",
+                                    "_d":[{
+                                        "Title":".row.event.eventheading",
                                         "Team1Event":".team-title",
                                         "Money":".column.money.pull-right",
                                         "Spread":".column.spread.pull-right",
                                         "Total":".column.total.pull-right",
-                                    }
+                                        "Data selector":".row",
+
+                                        "Teams":{
+                                            "_s":".row",
+                                            "_d":[{
+                                                "Team1":".col-xs-3.col-md-6.col-lg-6 .team-title",
+                                                "Money":".column.money.pull-right",
+                                                "Spread":".column.spread.pull-right",
+                                                "Total":".column.total.pull-right",
+                                            }]
+                                        }
+                                    }]
                                     
                                 },
 
-                            "Events":{
+                            "Eventselected1":{
 
                                 "_s":".column.total.pull-right",
 
@@ -359,9 +407,12 @@ function readDataFromWebsite(dirFile)
                 console.log("file saved in " + dirFile + ".json file");
             });
 
-     // console.log("Games");  
-     //   console.log(json2.PROPOSITIONS.Games);
-       // console.log(json2.PROPOSITIONS.Games.Events)
+    //         console.log("Events"); 
+    //  console.log(json2.PROPOSITIONS.EventSelected.Teams);
+     console.log("Games"); 
+        console.log(json2.PROPOSITIONS.Games);
+        console.log("Propositions");
+     console.log(json2.PROPOSITIONS)
       //  console.log(json2.PROPOSITIONS.Games.Id10.replace('moreBets',''));
 
 //           var values= [];
@@ -377,9 +428,28 @@ function readDataFromWebsite(dirFile)
               
                
                                          insertEventNHL(2,dirFile, json2.PROPOSITIONS.Games[Game].idevent, json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].Time, '2ndteam','2ndtml','2ndtSP', '2ndtTotal', json2.PROPOSITIONS.Games[Game].Firstteam, json2.PROPOSITIONS.Games[Game].Money, json2.PROPOSITIONS.Games[Game].Spread, json2.PROPOSITIONS.Games[Game].Total, json2.PROPOSITIONS.Games[Game].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition );
-                                    
+                                        console.log("Team:" + json2.PROPOSITIONS.Games[Game].Link.replace('./','https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/'));
+                                       
+                                      setTimeout( readDataFromWebsite(json2.PROPOSITIONS.Games[Game].Link.replace('./','https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/')) 
+                                          
+                                      , 200);
                
             }
+
+            for( var Dirlinen in json2.PROPOSITIONS.Dirline) {   
+                
+               
+              
+               console.log("Dirline:")
+                                       
+                                        console.log("Team:" + json2.PROPOSITIONS.Dirline[Dirlinen].Link.replace('./','https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/'));
+                                       
+                                      setTimeout( readDataFromWebsite(json2.PROPOSITIONS.Games[Game].Link.replace('./','https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/')) 
+                                          
+                                      , 200);
+               
+            }
+
         
             
       });
