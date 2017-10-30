@@ -1,23 +1,40 @@
 USE [DGSDATA]
 GO
-/****** Object:  StoredProcedure [dbo].[_BI_Feed]    Script Date: 10/30/2017 4:46:20 PM ******/
+/****** Object:  StoredProcedure [dbo].[_BI_Feed_to_Apps]    Script Date: 10/30/2017 4:18:53 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [dbo].[_BI_Feed] 
+ALTER PROCEDURE [dbo].[_BI_Feed_to_Apps] 
 	-- Add the parameters for the stored procedure here
-		@Yesterday datetime,
-		@Today datetime,		
-		@Sport Varchar(5),
-		@League Varchar(50),
-		@Player Varchar(15)
+		
+		
 AS
 BEGIN
+
+
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
+
+declare @Day1 datetime
+declare @Dat2 datetime 
+declare @Today datetime
+declare @Yesterday datetime
+declare @Sport Varchar(5)
+declare		@League Varchar(50)
+declare		@Player Varchar(15)
+
+set @Day1 = '2017-10-30 16:22:38.430'
+
+
+set @Today= DATEADD(ms, -3, CONVERT(DATETIME,CAST(@day1 AS DATE)) )
+set @Yesterday = CAST(DATEADD(day,-1, @Day1) AS DATE) 
+set @Sport = ''
+set @League = ''
+set @Player = ''
+
 
 DECLARE @Betsidentifier TABLE 
 (
@@ -84,7 +101,44 @@ INSERT INTO @Betsidentifier
 --		 0,	-- @WagerPlaced			Integer,	/*0:Both	1:Phone		2:Internet	*/
 --		 0	-- @Orderby				Integer [0 = Player, else = Ticket]
 
-
+INSERT INTO [G8Apps].[dbo].[_prueba_luis_temp_BI_WL]( 
+[IdWager],
+[IdWagerDetail],
+IdAgent,
+Agent,
+[IdPlayer],
+[Player],
+[IdLineType],
+LineTypeName,
+[LoginName],
+[WinAmount],
+[RiskAmount],
+[Result],
+[Net],
+GamePeriod,
+LEAGUE,
+[CompleteDescription],
+[DetailDescription],
+TEAM,
+[IdGame],
+[IdLeague],
+[Period],
+[Play],
+WagerPlay,
+FAV_DOG,
+[IdSport],
+[PlacedDate],
+[SettledDate],
+[Odds],
+[Points],
+[Score],	
+--[ResultDetail],
+[IP],
+OpeningPoints,
+OpeningMoneyLine,
+ClosingPoints,
+ClosingMoneyLine,
+BeatLine) 
 Select
 [IdWager],
 [IdWagerDetail],
@@ -93,7 +147,7 @@ Agent,
 [IdPlayer],
 [Player],
 [IdLineType],
-Description as LineType,
+Description as LineTypeName,
 [LoginName],
 [WinAmount],
 [RiskAmount],
@@ -360,6 +414,10 @@ TEAM = (
 						
 )							 
 AS summary
+
+
+
+
 ORDER BY IdWager ASC
 
 
