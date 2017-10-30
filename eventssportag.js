@@ -240,38 +240,54 @@ function readDataFromWebsite(dirFile)
         
         "PROPOSITIONS":
         {
-          
-                    
 
-                "Each line":".col-xs-12.col-md-9.col-lg-9.eventrow",
-                "EachLine":{
-                    "_s":".col-xs-12.col-md-9.col-lg-9.eventrow",
-                    "_d":[{
+            "Main":".col-sm-12.eventbox",
+            "mainline":{
+                 "_s":".col-sm-12.eventbox",
+                 "_d":[{
+                    "Title":".row.event.eventheading",  
+                   
+                    "idevent":"a @ id",
+                    "Link":"a @ href",
 
-
-                "Direct line":".row",
-                "Dirline":{
-                    "_s":".row",
-                    "_d":[{
-                        "Title":".row.event.eventheading",  
-                        "Firstteam":"span#firstTeamName.team-title",  
-                        "Secondteam":"span#secondTeamName.team-title",
-                        "Team:":".team-title",
-                        "Team1":".col-xs-3.col-md-6.col-lg-6 .team-title",
-                        "Money":".column.money.pull-right",
-                        "Spread":".column.spread.pull-right",
-                        "Total":".column.total.pull-right",
-
-                        "Id7":".column.total.pull-right#id",
-                        "Id8":".column.total.pull-right #id",
-                        "Id9":"a",
-                        "idevent":"a @ id",
-                        "Link":"a @ href",
+                  
+        
+                        "Each line":"div.col-xs-12.col-md-9.col-lg-9.eventrow",
+                        "EachLine":{
+                            "_s":".col-xs-12.col-md-9.col-lg-9.eventrow",
+                            "_d":[{
+        
+        
+                        "Gametitle":".row",
+                        "Dirline":{
+                            "_s":"div.row",
+                            "_d":[{
+                                "Title":".row.event.eventheading",  
+                                "Firstteam":"span#firstTeamName.team-title",  
+                                "Secondteam":"span#secondTeamName.team-title",
+                                "Team:":".team-title",
+                                "Team1":".col-xs-3.col-md-6.col-lg-6 .team-title",
+                                "Money":".column.money.pull-right",
+                                "Spread":".column.spread.pull-right",
+                                "Total":".column.total.pull-right",
+        
+                                "Id7":".column.total.pull-right#id",
+                                "Id8":".column.total.pull-right #id",
+                                "Id9":"a",
+                                "idevent":"a @ id",
+                                "Link":"a @ href",
+                            }]
+                        },
+        
                     }]
-                },
+                    }
 
-            }]
-            }
+                 }
+
+                 ]   
+            },
+          
+           
         
         }
         }
@@ -293,8 +309,8 @@ function readDataFromWebsite(dirFile)
     //         console.log("Events"); 
     //  console.log(json2.PROPOSITIONS.EventSelected.Teams);
     
-    //     console.log("Propositions");
-    //  console.log(json2.PROPOSITIONS)
+        console.log("Propositions");
+      console.log(json2.PROPOSITIONS)
 
      //console.log("EachLine");
      //console.log(json2.PROPOSITIONS.EachLine)
@@ -309,30 +325,42 @@ function readDataFromWebsite(dirFile)
              
             var numPlayers=0;
         
-            
-          
-            for( var EachLines in json2.PROPOSITIONS.EachLine) {   
-                
-               console.log("Each Proposition: " + EachLines);
-               console.log(json2.PROPOSITIONS.EachLine[EachLines]);
-                for( var Dirlinen in json2.PROPOSITIONS.EachLine[EachLines].Dirline) {  
-                    console.log("Dirline number:" + Dirlinen) 
-              console.log("Dirline" + Dirlinen)
-             //  console.log(2,dirFile, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].idevent,json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Title, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Time, '2ndteam','2ndtml','2ndtSP', '2ndtTotal', json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Firstteam, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Money, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Spread, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLine].Dirline[Dirlinen].Total, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLine].Dirline[Dirlinen].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition )
-                       console.log("Each dirline : " + Dirlinen)   
-                       console.log( console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen]))             
-                                        // console.log("Team:" + json2.PROPOSITIONS.Dirline[Dirlinen].Link.replace('./','https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/'));
-                                        console.log("Money:")
-                                       console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Money)
-                                            console.log(json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Money, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Spread, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLine].Dirline[Dirlinen].Total)
-
-                                //  //     setTimeout( readDataFromWebsite(json2.PROPOSITIONS.Games[Game].Link.replace('./','https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/')) 
-                                          
-                                //       , 200);
-               
+            for (var mainLiness in json2.PROPOSITIONS.mainline)
+            {
+                console.log("Mainline number " + mainLiness)
+                for( var EachLines in json2.PROPOSITIONS.mainline[mainLiness].EachLine) {   
+                    
+                   console.log("EachLines number: " + EachLines);
+                   console.log(json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines]);
+                    for( var Dirlinen in json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline) {  
+    
+                        console.log("Dirline number: " + Dirlinen);
+                      //  insertEventNHL(2,dirFile, json2.PROPOSITIONS.Games[Game].idevent, json2.PROPOSITIONS.Gametitle, json2.PROPOSITIONS.Games[Game].Time, '2ndteam','2ndtml','2ndtSP', '2ndtTotal', json2.PROPOSITIONS.Games[Game].Firstteam, json2.PROPOSITIONS.Games[Game].Money, json2.PROPOSITIONS.Games[Game].Spread, json2.PROPOSITIONS.Games[Game].Total, json2.PROPOSITIONS.Games[Game].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition );
+                        console.log(2,dirFile, json2.PROPOSITIONS.mainline[mainLiness].idevent, json2.PROPOSITIONS.mainline[mainLiness].Title, 'Time', json2.PROPOSITIONS.mainline[mainLiness].Title,'2ndtml','2ndtSP', '2ndtTotal', 'Firstteam', 'Money', 'Spread', 'Total', 'Title', 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition)
+                        console.log("Dirline number:" + Dirlinen) 
+                  console.log("Dirline" + Dirlinen)
+                  console.log("Away team:");
+                  console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[1].Team);
+                  console.log("Away money:");
+                  console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[1].Money);
+                 //  console.log(2,dirFile, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].idevent,json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Title, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Time, '2ndteam','2ndtml','2ndtSP', '2ndtTotal', json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Firstteam, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Money, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Spread, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLine].Dirline[Dirlinen].Total, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLine].Dirline[Dirlinen].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition )
+                           console.log("Each dirline : " + Dirlinen)   
+                           console.log( console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen]))             
+                                            // console.log("Team:" + json2.PROPOSITIONS.Dirline[Dirlinen].Link.replace('./','https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/'));
+                                            console.log("Money:")
+                                           console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Money)
+                                                console.log(json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Money, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Spread, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLine].Dirline[Dirlinen].Total)
+    
+                                    //  //     setTimeout( readDataFromWebsite(json2.PROPOSITIONS.Games[Game].Link.replace('./','https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/')) 
+                                              
+                                    //       , 200);
+                   
+                }
+    
             }
-
-        }
+            }
+          
+           
             
       });
 
