@@ -332,11 +332,18 @@ function readDataFromWebsite(dirFile)
                     
                    console.log("EachLines number: " + EachLines);
                    console.log(json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines]);
+
+
+                   
+                  
+
+                   console.log(2,dirFile, json2.PROPOSITIONS.mainline[mainLiness].idevent, json2.PROPOSITIONS.mainline[mainLiness].Title, 'Time', json2.PROPOSITIONS.mainline[mainLiness].Title,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Team,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Total, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Team,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Money, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Total, json2.PROPOSITIONS.mainline[mainLiness].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition)
+
                     for( var Dirlinen in json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline) {  
     
                         console.log("Dirline number: " + Dirlinen);
                       //  insertEventNHL(2,dirFile, json2.PROPOSITIONS.Games[Game].idevent, json2.PROPOSITIONS.Gametitle, json2.PROPOSITIONS.Games[Game].Time, '2ndteam','2ndtml','2ndtSP', '2ndtTotal', json2.PROPOSITIONS.Games[Game].Firstteam, json2.PROPOSITIONS.Games[Game].Money, json2.PROPOSITIONS.Games[Game].Spread, json2.PROPOSITIONS.Games[Game].Total, json2.PROPOSITIONS.Games[Game].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition );
-                        console.log(2,dirFile, json2.PROPOSITIONS.mainline[mainLiness].idevent, json2.PROPOSITIONS.mainline[mainLiness].Title, 'Time', json2.PROPOSITIONS.mainline[mainLiness].Title,'2ndtml','2ndtSP', '2ndtTotal', 'Firstteam', 'Money', 'Spread', 'Total', 'Title', 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition)
+                       
                         console.log("Dirline number:" + Dirlinen) 
                   console.log("Dirline" + Dirlinen)
                   console.log("Away team:");
