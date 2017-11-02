@@ -306,20 +306,11 @@ function readDataFromWebsite(dirFile)
                 console.log("file saved in " + dirFile + ".json file");
             });
 
-    //         console.log("Events"); 
-    //  console.log(json2.PROPOSITIONS.EventSelected.Teams);
     
         console.log("Propositions");
       console.log(json2.PROPOSITIONS)
 
-     //console.log("EachLine");
-     //console.log(json2.PROPOSITIONS.EachLine)
-
-    //  console.log("DirLine");
-    //  console.log(json2.PROPOSITIONS.EachLine.Dirline)
-      //  console.log(json2.PROPOSITIONS.Games.Id10.replace('moreBets',''));
-
-//           var values= [];
+     
           
                 
              
@@ -337,7 +328,10 @@ function readDataFromWebsite(dirFile)
                    
                   
 
-                   console.log(2,dirFile, json2.PROPOSITIONS.mainline[mainLiness].idevent, json2.PROPOSITIONS.mainline[mainLiness].Title, 'Time', json2.PROPOSITIONS.mainline[mainLiness].Title,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Team,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Total, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Team,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Money, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Total, json2.PROPOSITIONS.mainline[mainLiness].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition)
+                   console.log(2,dirFile, json2.PROPOSITIONS.mainline[mainLiness].idevent, json2.PROPOSITIONS.mainline[mainLiness].Title, 'Time',json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Secondteam,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Money,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Total, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Firstteam,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Money, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Total, json2.PROPOSITIONS.mainline[mainLiness].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE',1)
+                   insertEventNHL(2,dirFile, json2.PROPOSITIONS.mainline[mainLiness].idevent, json2.PROPOSITIONS.mainline[mainLiness].Title, 'Time',json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Secondteam,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Money,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Total, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Firstteam,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Money, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Total, json2.PROPOSITIONS.mainline[mainLiness].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', 1);
+
+
 
                     for( var Dirlinen in json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline) {  
     
