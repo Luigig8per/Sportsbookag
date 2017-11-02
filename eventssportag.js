@@ -246,51 +246,41 @@ function readDataFromWebsite(dirFile)
                  "_s":".col-sm-12.eventbox",
                  "_d":[{
                     "Title":".row.event.eventheading",  
-                   "Hour":"#time",
+                   
                     "idevent":"a @ id",
                     "Link":"a @ href",
 
                   
         
-                        "Eachline":".col-sm-12.eventbox",
-                        "Game":"div.col-xs-12.col-md-9.col-lg-9.eventrow",
-                        "Game":{
-                                 "_s":".col-xs-12.col-md-9.col-lg-9.eventrow",
-
-
-                                 "EachLine":{
-                                    "_s":".col-sm-12.eventbox",
-                                  
-                                    "_d":[{
-                
-                
-                                "Gametitle":".row",
-                                "Hour:":"#time",
-                                "Hou2:":".hidden-xs.hidden-sm.col-md-2.col-lg-1.column.time",
-                                "Dirline":{
-                                    "_s":"div.row",
-                                    "_d":[{
-                                        "Title":".row.event.eventheading",  
-                                        "Firstteam":"span#firstTeamName.team-title",  
-                                        "Secondteam":"span#secondTeamName.team-title",
-                                        "Team:":".team-title",
-                                        "Team1":".col-xs-3.col-md-6.col-lg-6 .team-title",
-                                        "Money":".column.money.pull-right",
-                                        "Spread":".column.spread.pull-right",
-                                        "Total":".column.total.pull-right",
-                
-                                        "Id7":".column.total.pull-right#id",
-                                        "Id8":".column.total.pull-right #id",
-                                        "Id9":"a",
-                                        "idevent":"a @ id",
-                                        "Link":"a @ href",
-                                    }]
-                                },
-                
+                        "Each line":"div.col-xs-12.col-md-9.col-lg-9.eventrow",
+                        "EachLine":{
+                            "_s":".col-xs-12.col-md-9.col-lg-9.eventrow",
+                            "_d":[{
+        
+        
+                        "Gametitle":".row",
+                        "Dirline":{
+                            "_s":"div.row",
+                            "_d":[{
+                                "Title":".row.event.eventheading",  
+                                "Firstteam":"span#firstTeamName.team-title",  
+                                "Secondteam":"span#secondTeamName.team-title",
+                                "Team:":".team-title",
+                                "Team1":".col-xs-3.col-md-6.col-lg-6 .team-title",
+                                "Money":".column.money.pull-right",
+                                "Spread":".column.spread.pull-right",
+                                "Total":".column.total.pull-right",
+        
+                                "Id7":".column.total.pull-right#id",
+                                "Id8":".column.total.pull-right #id",
+                                "Id9":"a",
+                                "idevent":"a @ id",
+                                "Link":"a @ href",
                             }]
-                            }
                         },
-                       
+        
+                    }]
+                    }
 
                  }
 
@@ -316,12 +306,20 @@ function readDataFromWebsite(dirFile)
                 console.log("file saved in " + dirFile + ".json file");
             });
 
-    
+    //         console.log("Events"); 
+    //  console.log(json2.PROPOSITIONS.EventSelected.Teams);
     
         console.log("Propositions");
       console.log(json2.PROPOSITIONS)
 
-    
+     //console.log("EachLine");
+     //console.log(json2.PROPOSITIONS.EachLine)
+
+    //  console.log("DirLine");
+    //  console.log(json2.PROPOSITIONS.EachLine.Dirline)
+      //  console.log(json2.PROPOSITIONS.Games.Id10.replace('moreBets',''));
+
+//           var values= [];
           
                 
              
@@ -338,16 +336,20 @@ function readDataFromWebsite(dirFile)
 
                    
                   
-//Insert:
-                   console.log(2,dirFile, json2.PROPOSITIONS.mainline[mainLiness].idevent, json2.PROPOSITIONS.mainline[mainLiness].Title, 'Time', json2.PROPOSITIONS.mainline[mainLiness].Title,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Team,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Total, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Team,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Money, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Total, json2.PROPOSITIONS.mainline[mainLiness].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition)
 
-                   console.log(2,dirFile, json2.PROPOSITIONS.mainline[mainLiness].idevent, json2.PROPOSITIONS.mainline[mainLiness].Title, 'Time', json2.PROPOSITIONS.mainline[mainLiness].Title,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Firstteam,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Money, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Total, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Secondteam,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Money, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Total, json2.PROPOSITIONS.mainline[mainLiness].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition)
+                   console.log(2,dirFile, json2.PROPOSITIONS.mainline[mainLiness].idevent, json2.PROPOSITIONS.mainline[mainLiness].Title, 'Time', json2.PROPOSITIONS.mainline[mainLiness].Title,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Team,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Total, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Team,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Money, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Total, json2.PROPOSITIONS.mainline[mainLiness].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition)
 
                     for( var Dirlinen in json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline) {  
     
-                      
-                 
-                
+                        console.log("Dirline number: " + Dirlinen);
+                      //  insertEventNHL(2,dirFile, json2.PROPOSITIONS.Games[Game].idevent, json2.PROPOSITIONS.Gametitle, json2.PROPOSITIONS.Games[Game].Time, '2ndteam','2ndtml','2ndtSP', '2ndtTotal', json2.PROPOSITIONS.Games[Game].Firstteam, json2.PROPOSITIONS.Games[Game].Money, json2.PROPOSITIONS.Games[Game].Spread, json2.PROPOSITIONS.Games[Game].Total, json2.PROPOSITIONS.Games[Game].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition );
+                       
+                        console.log("Dirline number:" + Dirlinen) 
+                  console.log("Dirline" + Dirlinen)
+                  console.log("Away team:");
+                  console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[1].Team);
+                  console.log("Away money:");
+                  console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[1].Money);
                  //  console.log(2,dirFile, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].idevent,json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Title, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Time, '2ndteam','2ndtml','2ndtSP', '2ndtTotal', json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Firstteam, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Money, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Spread, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLine].Dirline[Dirlinen].Total, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLine].Dirline[Dirlinen].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition )
                            console.log("Each dirline : " + Dirlinen)   
                            console.log( console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen]))             
