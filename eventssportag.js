@@ -48,8 +48,8 @@ function getDateTime() {
 
 
 var insertEventNHL = function(qPlayers, propositions_name, sportsbookag_event_id, title, hour,  home_team,   home_money_ln,  home_sp,home_total, away_team,  away_money_ln , away_sp,away_total, game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition) {
-   console.log("Printing from insertEventNHL:") 
-    console.log(qPlayers, propositions_name, sportsbookag_event_id, title, hour, home_team,  home_money_ln, away_team,'',  away_money_ln , game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition )
+   //console.log("Doing insert:") 
+    //console.log(qPlayers, propositions_name, sportsbookag_event_id, title, hour, home_team,  home_money_ln, away_team,'',  away_money_ln , game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition )
    
         return sql.execute( {
             procedure: "[dbo].[sportsbookag_insert_event_sp_tot]",
@@ -301,60 +301,30 @@ function readDataFromWebsite(dirFile)
         var json2= JSON.parse(json);
 
 
-     var idProposition=1;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+     console.log('Analizying ' + dirFile + 'for updates');                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
  fs.writeFile(dirFile + ".json", JSON.stringify(json, null, 4), function(err) {
-                console.log("file saved in " + dirFile + ".json file");
+            
             });
 
     
-        console.log("Propositions");
-      console.log(json2.PROPOSITIONS)
-
-     
-          
                 
              
             var numPlayers=0;
         
             for (var mainLiness in json2.PROPOSITIONS.mainline)
             {
-                console.log("Mainline number " + mainLiness)
+              
                 for( var EachLines in json2.PROPOSITIONS.mainline[mainLiness].EachLine) {   
                     
-                   console.log("EachLines number: " + EachLines);
-                   console.log(json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines]);
-
-
-                   
-                  
-
-                   console.log(2,dirFile, json2.PROPOSITIONS.mainline[mainLiness].idevent, json2.PROPOSITIONS.mainline[mainLiness].Title, 'Time',json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Secondteam,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Money,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Total, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Firstteam,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Money, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Total, json2.PROPOSITIONS.mainline[mainLiness].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE',1)
+                
                    insertEventNHL(2,dirFile, json2.PROPOSITIONS.mainline[mainLiness].idevent, json2.PROPOSITIONS.mainline[mainLiness].Title, 'Time',json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Secondteam,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Money,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[3].Total, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Firstteam,json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Money, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Spread, json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline[1].Total, json2.PROPOSITIONS.mainline[mainLiness].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', 1);
 
 
 
                     for( var Dirlinen in json2.PROPOSITIONS.mainline[mainLiness].EachLine[EachLines].Dirline) {  
     
-                        console.log("Dirline number: " + Dirlinen);
-                      //  insertEventNHL(2,dirFile, json2.PROPOSITIONS.Games[Game].idevent, json2.PROPOSITIONS.Gametitle, json2.PROPOSITIONS.Games[Game].Time, '2ndteam','2ndtml','2ndtSP', '2ndtTotal', json2.PROPOSITIONS.Games[Game].Firstteam, json2.PROPOSITIONS.Games[Game].Money, json2.PROPOSITIONS.Games[Game].Spread, json2.PROPOSITIONS.Games[Game].Total, json2.PROPOSITIONS.Games[Game].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition );
-                       
-                        console.log("Dirline number:" + Dirlinen) 
-                  console.log("Dirline" + Dirlinen)
-                  console.log("Away team:");
-                  console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[1].Team);
-                  console.log("Away money:");
-                  console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[1].Money);
-                 //  console.log(2,dirFile, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].idevent,json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Title, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Time, '2ndteam','2ndtml','2ndtSP', '2ndtTotal', json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Firstteam, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Money, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Spread, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLine].Dirline[Dirlinen].Total, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLine].Dirline[Dirlinen].Title, 'option3', 'option3ML', "option4 ", 'option4ML', 'NOTE', idProposition )
-                           console.log("Each dirline : " + Dirlinen)   
-                           console.log( console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen]))             
-                                            // console.log("Team:" + json2.PROPOSITIONS.Dirline[Dirlinen].Link.replace('./','https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/'));
-                                            console.log("Money:")
-                                           console.log(json2.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Money)
-                                                console.log(json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Money, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLines].Dirline[Dirlinen].Spread, json2.PROPOSITIONS.PROPOSITIONS.EachLine[EachLine].Dirline[Dirlinen].Total)
-    
-                                    //  //     setTimeout( readDataFromWebsite(json2.PROPOSITIONS.Games[Game].Link.replace('./','https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/')) 
-                                              
-                                    //       , 200);
+                      
+                 
                    
                 }
     
