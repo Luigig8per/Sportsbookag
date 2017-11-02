@@ -304,7 +304,7 @@ function readDataFromWebsite(dirFile)
         
         
         
-        console.log(getDateTime() + '... Analizying ' +  console.log('running a task every 5 minutes. Actual time: ' + );)
+       
             
         var json=$('body').scrape(frame1, { string: true } );
          
