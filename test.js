@@ -9,6 +9,7 @@ var schedule = require('node-schedule');
 var cronJob = require('cron').CronJob;
 var cron = require('node-cron');
 var Horseman = require('node-horseman');
+var request = require('request');
 
 
 var config = {
@@ -20,6 +21,18 @@ var config = {
 
 sql.setDefaultConfig( config );
 
+function sendLine(params, cb){
+    request.post(
+            'http://tools.golden8sports.com/bridge/props.asp',
+            { form: params },
+            function (error, response, body) {
+                    //console.log(body);
+                    if (!error && response.statusCode == 200) {
+                            cb(body);
+                    }
+            }
+    );
+}
 
 function getDateTime() {
     
@@ -46,106 +59,50 @@ function getDateTime() {
     
     }
 
-
-var insertEventNHL = function(qPlayers, propositions_name, thegreek_event_id, title, hour,  home_team,   home_money_ln,  away_team,  away_money_ln , game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition) {
-    
-        return sql.execute( {
-            procedure: "[dbo].[thegreek_insert_event_nhl]",
-            params: {
-
-                qPlayers: {
-                    type: sql.int,
-                    val: qPlayers
-                },
-
-                propositions_name: {
-                    type: sql.VARCHAR(200),
-                    val: propositions_name
-                },
-                thegreek_event_id: {
-                    type: sql.INT,
-                    val: thegreek_event_id
-                },
-                home_team: {
-                    type: sql.VARCHAR(60),
-                    val: home_team
-                },
-                title: {
-                    type: sql.VARCHAR(60),
-                    val: title
-                },
-               
-                hour: {
-                    type: sql.VARCHAR(60),
-                    val: hour
-                },
-                 home_money_ln: {
-                    type: sql.int,
-                    val: home_money_ln
-                },
-                 
-                  away_team: {
-                    type: sql.VARCHAR(60),
-                    val: away_team
-                },
-                
-                away_money_ln: {
-                    type: sql.int,
-                    val: away_money_ln
-                    
-                },
-    
-               
-    
-                game_title: {
-                  type: sql.VARCHAR(60),
-                      val: game_title
-                    },
-
-
-                    option_3: {
-                        type: sql.VARCHAR(60),
-                            val: option_3
-                          },
-
-                          option_3_money_ln: {
-                            type: sql.int,
-                                val: option_3_money_ln
-                              },
-
-                              option_4: {
-                                type: sql.VARCHAR(60),
-                                    val: option_4
-                                  },
+    function postReq(){
+        var http = require('http');
+        var querystring = require('querystring');
         
-                                  option_4_money_ln: {
-                                    type: sql.int,
-                                        val: option_4_money_ln
-                                      },
-
-                                      note: {
-                                        type: sql.VARCHAR(60),
-                                            val: note
-                                          },
-
-
-                                          idProposition: {
-                                            type: sql.int,
-                                                val:idProposition
-                                              },
-    
-                  
-    
-    
-    
+        var postData = querystring.stringify({
+            msg: 'hello world'
+        });
+        
+        var options = {
+            hostname: 'localhost',
+            port: 3000,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': postData.length
             }
-        } );
-       
-    };
+        };
+        
+        var req = http.request(options, function (res) {
+            console.log('STATUS:', res.statusCode);
+            console.log('HEADERS:', JSON.stringify(res.headers));
+        
+            res.setEncoding('utf8');
+        
+            res.on('data', function (chunk) {
+                console.log('BODY:', chunk);
+            });
+        
+            res.on('end', function () {
+                console.log('No more data in response.');
+            });
+        });
+        
+        req.on('error', function (e) {
+            console.log('Problem with request:', e.message);
+        });
+        
+        req.write(postData);
+        req.end();
+    }
 
 
 
-    var insertEvent_check = function(qPlayers, propositions_name, thegreek_event_id, title, hour,  home_team,   home_money_ln,  away_team,  away_money_ln , game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition) {
+    var insertEventNHL_check = function(qPlayers, propositions_name, thegreek_event_id, title, hour,  home_team,   home_money_ln,  away_team,  away_money_ln , game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition) {
         
     
        
@@ -249,30 +206,30 @@ var insertEventNHL = function(qPlayers, propositions_name, thegreek_event_id, ti
 
            
 
-            //     var linetosend = {
+                var linetosend = {
                     
              
              
              
-            //          "u":"g8",
-            //           "p":"g8bridge",
-            //           "action": "setValue",   
-            //           "lid": "154",
-            //          "vml": away_money_ln,
-            //          "hml": home_money_ln ,
-            //          "ttl": '-9999' ,
-            //          "tov": '-9999' ,
-            //           "tun": '-9999' ,
-            //          "vsd": '-9999',
-            //           "vso": '-9999' ,
-            //            "hsd": '-9999' ,
-            //            "hso": '-9999' ,
-            //            "draw": '-9999', 
-            //            "eid": thegreek_event_id,
+                     "u":"g8",
+                      "p":"g8bridge",
+                      "action": "setValue",   
+                      "lid": "154",
+                     "vml": away_money_ln,
+                     "hml": home_money_ln ,
+                     "ttl": '-9999' ,
+                     "tov": '-9999' ,
+                      "tun": '-9999' ,
+                     "vsd": '-9999',
+                      "vso": '-9999' ,
+                       "hsd": '-9999' ,
+                       "hso": '-9999' ,
+                       "draw": '-9999', 
+                       "eid": thegreek_event_id,
              
              
              
-            //  }
+             }
 
                 sendLine(linetosend,function(lineResult){
         console.log(lineResult);
@@ -304,6 +261,119 @@ var insertEventNHL = function(qPlayers, propositions_name, thegreek_event_id, ti
            
         };
 
+
+
+
+var insertEventNHL = function(qPlayers, propositions_name, thegreek_event_id, title, hour,  home_team,   home_money_ln,  away_team,  away_money_ln , game_title, option_3, option_3_money_ln, option_4, option_4_money_ln, note, idProposition) {
+    
+
+    
+
+
+
+
+
+
+       
+
+
+    
+        
+
+        return sql.execute( {
+            procedure: "[dbo].[thegreek_insert_event_nhl]",
+            params: {
+
+                qPlayers: {
+                    type: sql.int,
+                    val: qPlayers
+                },
+
+                propositions_name: {
+                    type: sql.VARCHAR(200),
+                    val: propositions_name
+                },
+                thegreek_event_id: {
+                    type: sql.INT,
+                    val: thegreek_event_id
+                },
+                home_team: {
+                    type: sql.VARCHAR(60),
+                    val: home_team
+                },
+                title: {
+                    type: sql.VARCHAR(60),
+                    val: title
+                },
+               
+                hour: {
+                    type: sql.VARCHAR(60),
+                    val: hour
+                },
+                 home_money_ln: {
+                    type: sql.int,
+                    val: home_money_ln
+                },
+                 
+                  away_team: {
+                    type: sql.VARCHAR(60),
+                    val: away_team
+                },
+                
+                away_money_ln: {
+                    type: sql.int,
+                    val: away_money_ln
+                    
+                },
+    
+               
+    
+                game_title: {
+                  type: sql.VARCHAR(60),
+                      val: game_title
+                    },
+
+
+                    option_3: {
+                        type: sql.VARCHAR(60),
+                            val: option_3
+                          },
+
+                          option_3_money_ln: {
+                            type: sql.int,
+                                val: option_3_money_ln
+                              },
+
+                              option_4: {
+                                type: sql.VARCHAR(60),
+                                    val: option_4
+                                  },
+        
+                                  option_4_money_ln: {
+                                    type: sql.int,
+                                        val: option_4_money_ln
+                                      },
+
+                                      note: {
+                                        type: sql.VARCHAR(60),
+                                            val: note
+                                          },
+
+
+                                          idProposition: {
+                                            type: sql.int,
+                                                val:idProposition
+                                              },
+    
+                  
+    
+    
+    
+            }
+        } );
+       
+    };
+
     var createorExtractIdProposition = function(propositions_name) {
         
             return sql.execute( {
@@ -325,22 +395,26 @@ var insertEventNHL = function(qPlayers, propositions_name, thegreek_event_id, ti
 
 
     var task = cron.schedule('*/5 * * * *', function(){
-        console.log('running a task every 5 minutes. Actual time: ' + getDateTime());
-        readNHLData('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-team-score-first.sbk');
-        readNHLData('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-team-totals.sbk');
-        readNHLData('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-game-props.sbk');
+       
+       readWebsites();
       });
 
-      readNHLData('https://www.sportsbook.ag/sbk/sportsbook4/nfl-betting/props-team-score-first.sbk');
-      readNHLData('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-team-totals.sbk');
-      readNHLData('https://www.sportsbook.ag/sbk/sportsbook4/nba-betting/props-game-props.sbk');
+      console.log('running task every 5 minutes. Actual time: ' + getDateTime());
+      readWebsites();
 
 
       task.start();
 
+
+function readWebsites()
+{
+    readNHLData('http://www.thegreek.com/sportsbook/bet/betting-odds/Baseball%20Propositions');
+    readNHLData('http://www.thegreek.com/sportsbook/bet/betting-odds/Hockey%20Propositions');
+}
+
 function readNHLData(dirFile)
 {
-
+   
 
     var horseman = new Horseman();
     
@@ -359,7 +433,7 @@ function readNHLData(dirFile)
             }
         
             var dataHtml= (htmlText);
-           // console.log(htmlText);
+            
              let $= cheerio.load(dataHtml);
         
              
@@ -368,61 +442,51 @@ function readNHLData(dirFile)
         
         let frame1={
             
-            
         
         "PROPOSITIONS":
         {
-          
-
-                    "Category":".titleLabel",
+        
+        
+            "All":"*",
+                    "Sub":"h1",
                    
+            
+                
+             
                     "Games":{
-                        "_s":".col-sm-12.eventbox",
+                        "_s":".simpleContainer .simpleContainer",
                         "_d":[{
                 
-                           "Game id":"#id",
-                           "Game id2":"div.col-sm-12.eventbox#id",
-                                "Time":"#time",   
-                                
-                                "Title":".row.event.eventheading",  
-                                
-                                "Team1":".col-xs-3.col-md-6.col-lg-6",
-                                "Money":".column.money.pull-right",
-                                "Spread":".column.spread.pull-right",
-                                "Total":".column.total.pull-right",
-
-                                "Id7":".column.total.pull-right#id",
-                                "Id8":".column.total.pull-right #id",
-                                "Id9":"a",
-                                "Id10":"a @ id",
-                                "Link":"a @ href",
-
+                            "MainMsg":"#MainMsg",
+                            "Title": "H2",
+                           
+                            "idGame":".lines  @ id",
+                            "id2":".lines [id]",
+                
                             "Events":{
-
-                                "_s":".column.total.pull-right",
-
+                                "_s":".table-container",
                                 "_d":[{
-                                     "Id":"#id",
-                                    "Team":"#firstTeamName",
-                                 "Hour":"#time",
-                        //             "Title": ".col-xs-12",
-                        //   "Name":".team-title",
-                        //                         "Total":".column.money.pull-right",
-                        //             "id":".lines  @ id[2]",
-                        //             "id2":".lines [id]",
+                        
+                                    "id":".lines  @ id[2]",
+                                    "id2":".lines [id]",
                                                
                     
                                         "Lines":{
-                                            "_s":".row",
+                                            "_s":".lines",
                                             "_d":[{
-                                                "Name":".team-title",
-                                                "Total":".column.money.pull-right",
-                                              
+                                    
+                                                "id":"div  @ id",
+                                                "id":".table  @ id",
+                                                "id3":"  [id]",
+                                                "id4":"  #id",
+                                                "id5":"  [attr=id]",
+                                             
                                                            
-                                            
+                                                "Title": ".title",
+                                                "Note":".props-table.props-bar",
                                             
                                                     "Players":{
-                                                        "_s":".row",
+                                                        "_s":".table",
                                                         "_d":[{
                                                             "id":".table  @ id",
                                                             "id5":"  [attr=id]",
@@ -442,7 +506,6 @@ function readNHLData(dirFile)
         
                                                                
                                     
-                                                    
                                             }]
                                         }
         
@@ -467,8 +530,6 @@ function readNHLData(dirFile)
         var json=$('body').scrape(frame1, { string: true } );
          
         var json2= JSON.parse(json);
-
-        console.log(json2.PROPOSITIONS.Games);
      var idProposition;
 
        // console.log(json2);
@@ -476,14 +537,13 @@ function readNHLData(dirFile)
           var values= [];
           
                 
-             
+          console.log(getDateTime() + '... Analizying ' + dirFile + ' for updates...')
             var numPlayers=0;
         
             
             for( var Game in json2.PROPOSITIONS.Games) {   
                 
-               
-              
+                     
                 for( var Events in json2.PROPOSITIONS.Games[Game].Events) {    
                    
         
@@ -511,7 +571,7 @@ function readNHLData(dirFile)
 
                                      if (json2.PROPOSITIONS.Sub=="Hockey Propositions")
                                      {
-idProposition=1;
+                                        idProposition=1;
                                      }
                                      else
                                      if (json2.PROPOSITIONS.Sub=="Baseball Propositions")
@@ -522,20 +582,23 @@ idProposition=1;
                                   //   console.log(idProposition);
                                      if (numPlayers==2)
                                      {
-                                      //  insertEventNHL(2,json2.PROPOSITIONS.Sub, eventId.slice(0,9), json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].MainMsg, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].player,json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds,  json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Title, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Note, idProposition );
+                                        insertEventNHL_check(2,json2.PROPOSITIONS.Sub, eventId.slice(0,9), json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].MainMsg, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].player,json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds,  json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Title, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Note, idProposition );
                                      }
                                      else
                                      if (numPlayers==3)
                                     {
-                                    //    insertEventNHL(3,json2.PROPOSITIONS.Sub, eventId.slice(0,9), json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].MainMsg, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].player,json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds,  json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Title, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].playerodds, idProposition );
+
+                                        insertEventNHL_check(2,json2.PROPOSITIONS.Sub, eventId.slice(0,9), json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].MainMsg, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].player,json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds,  json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Title, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Note, idProposition );
+
+                                      // insertEventNHL(3,json2.PROPOSITIONS.Sub, eventId.slice(0,9), json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].MainMsg, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].player,json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds,  json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Title, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].playerodds, idProposition );
                                        
                                        
                                     }
                                     if (numPlayers==4)
                                     {
                                        
-                                        
-                                      //    insertEventNHL(4,json2.PROPOSITIONS.Sub, eventId.slice(0,9), json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].MainMsg, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].player,json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds,  json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Title, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[3].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[3].playerodds, idProposition );
+                                        insertEventNHL_check(2,json2.PROPOSITIONS.Sub, eventId.slice(0,9), json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].MainMsg, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].player,json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds,  json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Title, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Note, idProposition );
+                                        //  insertEventNHL(4,json2.PROPOSITIONS.Sub, eventId.slice(0,9), json2.PROPOSITIONS.Games[Game].Title, json2.PROPOSITIONS.Games[Game].MainMsg, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].player,json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[1].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[0].playerodds,  json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Title, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[2].playerodds, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[3].player, json2.PROPOSITIONS.Games[Game].Events[Events].Lines[Lines].Players[3].playerodds, idProposition );
                                       
                                       
                                     }
@@ -553,7 +616,7 @@ idProposition=1;
         
             
             fs.writeFile('thegreek.json', JSON.stringify(json, null, 4), function(err) {
-                console.log('Thegreek saved in theGreek.json file');
+              //  console.log('Thegreek saved in theGreek.json file');
             });
         
             
